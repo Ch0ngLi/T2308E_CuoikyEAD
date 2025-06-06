@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Add Score</title>
+</h:head>
+<h:body>
+    <h1>Add Score for Student</h1>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="student" value="Student:"/>
+            <h:selectOneMenu id="student" value="#{scoreController.selectedStudentId}" required="true">
+                <f:selectItem itemLabel="-- Select Student --" itemValue="#{null}"/>
+                <f:selectItems value="#{scoreController.getAllStudents()}"
+                               var="student"
+                               itemValue="#{student.studentId}"
+                               itemLabel="#{student.fullName} (#{student.studentCode})"/>
+            </h:selectOneMenu>
+
+            <h:outputLabel for="subject" value="Subject:"/>
+            <h:selectOneMenu id="subject" value="#{scoreController.selectedSubjectId}" required="true">
+                <f:selectItem itemLabel="-- Select Subject --" itemValue="#{null}"/>
+                <f:selectItems value="#{scoreController.getAllSubjects()}"
+                               var="subject"
+                               itemValue="#{subject.subjectId}"
+                               itemLabel="#{subject.subjectName}"/>
+            </h:selectOneMenu>
+
+            <h:outputLabel for="score1" value="Score 1:"/>
+            <h:inputText id="score1" value="#{scoreController.newScore.score1}" required="true"/>
+
+            <h:outputLabel for="score2" value="Score 2:"/>
+            <h:inputText id="score2" value="#{scoreController.newScore.score2}" required="true"/>
+
+            <h:commandButton value="Save Score" action="#{scoreController.saveScore}"/>
+        </h:panelGrid>
+    </h:form>
+    <h:link outcome="studentList" value="View Student List"/>
+</h:body>
+</html>

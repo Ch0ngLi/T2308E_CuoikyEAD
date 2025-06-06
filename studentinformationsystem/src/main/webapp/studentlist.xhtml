@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Student List</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+    </style>
+</h:head>
+<h:body>
+    <h1>Student Information System</h1>
+
+    <h:link outcome="addStudent" value="Add New Student"/> |
+    <h:link outcome="addScore" value="Add New Score"/>
+
+    <h:dataTable value="#{studentViewController.getAllStudents()}" var="student" styleClass="student-table">
+        <h:column>
+            <f:facet name="header">Student ID</f:facet>
+            #{student.studentId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Student Code</f:facet>
+            #{student.studentCode}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Full Name</f:facet>
+            #{student.fullName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Address</f:facet>
+            #{student.address}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Scores</f:facet>
+            <h:dataTable value="#{student.scores}" var="score" styleClass="score-table">
+                <h:column>
+                    <f:facet name="header">Subject</f:facet>
+                    #{score.subject.subjectName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Score 1</f:facet>
+                    #{score.score1}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Score 2</f:facet>
+                    #{score.score2}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Final Score</f:facet>
+                    #{studentViewController.calculateFinalScore(score.score1.doubleValue(), score.score2.doubleValue())}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Grade</f:facet>
+                    #{studentViewController.convertToGrade(score.score1.doubleValue(), score.score2.doubleValue())}
+                </h:column>
+            </h:dataTable>
+        </h:column>
+    </h:dataTable>
+</h:body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Add Student</title>
+</h:head>
+<h:body>
+    <h1>Add New Student</h1>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="studentCode" value="Student Code:"/>
+            <h:inputText id="studentCode" value="#{studentController.newStudent.studentCode}" required="true"/>
+
+            <h:outputLabel for="fullName" value="Full Name:"/>
+            <h:inputText id="fullName" value="#{studentController.newStudent.fullName}" required="true"/>
+
+            <h:outputLabel for="address" value="Address:"/>
+            <h:inputText id="address" value="#{studentController.newStudent.address}"/>
+
+            <h:commandButton value="Save Student" action="#{studentController.saveStudent}"/>
+        </h:panelGrid>
+    </h:form>
+    <h:link outcome="studentList" value="View Student List"/>
+</h:body>
+</html>
